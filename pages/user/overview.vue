@@ -130,19 +130,19 @@ export default Vue.extend({
       transactionColumns,
       buttons: [
         {
-          id: 3,
+          id: 1,
           title: 'Sales',
           icon: 'chart',
           link: '/user/reports/sales',
         },
         {
-          id: 4,
+          id: 2,
           title: 'Dealers',
           icon: 'chart',
           link: '/user/reports/#',
         },
         {
-          id: 4,
+          id: 3,
           title: 'Customers',
           icon: 'chart',
           link: '/user/reports/#',

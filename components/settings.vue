@@ -176,7 +176,6 @@ export default Vue.extend({
       loggedInUser: 'loggedInUser',
       getMessageCounts: 'user/getMessageCounts',
       theme: 'settings/getTheme',
-      isIframe: 'settings/getIsIframe',
     }),
   },
   methods: {

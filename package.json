@@ -33,6 +33,7 @@
     "tailwindcss-theme-swapper": "crswll/tailwindcss-theme-swapper",
     "url-loader": "^4.1.1",
     "vue-chartjs": "^3.5.1",
+    "vue-glide-js": "^1.3.14",
     "vue-paystack": "^2.0.4",
     "vue2-editor": "^2.10.3",
     "vuelidate": "^0.7.6",

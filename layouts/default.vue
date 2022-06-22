@@ -3,7 +3,7 @@
     <main class="h-screen overflow-x-hidden layout bg-primary-bg text-primary-default-main">
       <div class="bg-white">
         <header :class="getSiteFormat == siteFormat ? 'mw-container' : ''">
-          <bet-settings />
+          <car-settings />
         </header>
       </div>
       <header class="primary__gradient">
@@ -18,7 +18,7 @@
         </div>
       </header>
       <header>
-        <bet-m-settings @visible="checkSentData" />
+        <car-m-settings @visible="checkSentData" />
       </header>
 
       <div :class="getSiteFormat == siteFormat ? 'mw-container' : ''">
