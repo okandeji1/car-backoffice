@@ -172,9 +172,6 @@ export default {
   line-height: 16px;
 }
 
-.message-badge {
-}
-
 .modal {
   @apply p-4 z-30 shadow;
 

@@ -1,10 +1,15 @@
 <template>
-  <div class="flex w-full min-height">
-    <vue-glide class="w-full" type="carousel" ref="slider" :perView="perView" :autoplay="autoplay" v-model="currentIndex">
+  <div class="flex w-full min-height md:h-64">
+    <vue-glide class="w-full" :perView="perView" :autoplay="autoplay" v-model="currentIndex" :breakpoints="breakpoints">
       <vue-glide-slide v-for="currentItem in items" :key="currentItem.id" class="w-full flex items-center">
         <img :src="currentItem.imgUrl" class="w-full h-full" />
       </vue-glide-slide>
     </vue-glide>
+    <!-- <a-carousel autoplay>
+      <div v-if="currentItem in items">
+        <img :src="currentItem.imgUrl" class="w-full h-full" />
+      </div>
+    </a-carousel> -->
   </div>
 </template>
 
@@ -51,6 +56,14 @@ export default {
       perView: 1,
       autoplay: 2000,
       currentIndex: 0,
+      breakpoints: {
+        800: {
+          perView: 1,
+        },
+        480: {
+          perView: 1,
+        },
+      },
     };
   },
 

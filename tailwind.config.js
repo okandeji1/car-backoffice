@@ -190,6 +190,7 @@ module.exports = {
       },
       height: {
         7: '28px',
+        20: '20rem',
       },
       transformOrigin: {
         0: '0%',

@@ -1,9 +1,9 @@
 <template>
-  <div class="min-h-screen">
+  <main class="min-h-screen flex flex-col content">
     <lazy-car-navbar />
-    <Nuxt class="h-full w-full"/>
+    <Nuxt />
     <lazy-car-footer />
-  </div>
+  </main>
 </template>
 
 <script lang="ts">
@@ -27,3 +27,11 @@ export default {
   },
 };
 </script>
+
+<style>
+.content {
+  transition: all 0.3s;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+</style>
