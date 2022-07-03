@@ -68,7 +68,7 @@
     </div>
     <!-- Car Brand -->
     <div class="flex flex-col justify-center items-center p-2">
-      <h1>Car Price Brand</h1>
+      <h1 class="font-bold text-lg">Car Price Brand</h1>
       <a-row :gutter="4" type="flex">
         <a-col :span="8" v-for="(brand, index) in brands" :key="index" class="mb-2">
           <div class="flex flex-col justify-center items-center border w-full px-2 py-2">
@@ -79,15 +79,45 @@
       </a-row>
     </div>
     <!-- Featured promo (installment) -->
-    <div class="flex justify-center items-center p-2 overflow-x-auto w-full">
-      <div class="flex flex-col" v-for="(item, index) in featured" :key="index">
+    <div class="flex flex-col p-2">
+      <h1 class="font-bold text-lg">Featured Promo</h1>
+      <a-carousel autoplay :dots="false" class="md:hidden">
+        <div class="flex flex-col shadow-lg border" v-for="(item, index) in featured" :key="index">
+          <img :src="item.img" alt="" class="w-full" />
+          <div class="flex justify-center items-center bg-primary-m-primary m-1">
+            <h2 class="font-bold text-lg cursor-pointer">
+              {{ item.price }} <span>{{ item.period }}</span>
+            </h2>
+          </div>
+          <p class="font-bold text-md text-black m-2">{{ item.name }} {{ item.model }} With {{ item.price }}</p>
+          <div class="flex justify-between items-center m-2">
+            <a-button ghost class="text-primary-m-primary font-bold border border-primary-bg-sec">View Details</a-button>
+            <a-button class="bg-primary-m-primary font-bold text-white">Get Promo</a-button>
+          </div>
+        </div>
+      </a-carousel>
+      <p class="text-center cursor-pointer text-primary-m-primary p-2 text-lg md:hidden">View all promos</p>
+    </div>
+    <!-- Featured large screen -->
+    <div class="hidden md:flex justify-center items-center p-2">
+      <div class="flex flex-col mx-2 justify-center border shadow-lg" v-for="(item, index) in featured" :key="index">
         <img :src="item.img" alt="" class="w-full" />
-        <div class="flex justify-center items-center text-black font-bold p-1">
-          <h2>
+        <div class="flex justify-center items-center bg-primary-m-primary m-1">
+          <h2 class="font-bold text-lg cursor-pointer">
             {{ item.price }} <span>{{ item.period }}</span>
           </h2>
         </div>
+        <p class="font-bold text-md text-black m-2">{{ item.name }} {{ item.model }} With {{ item.price }}</p>
+        <div class="flex justify-between items-center m-2">
+          <a-button ghost class="text-primary-m-primary font-bold border border-primary-bg-sec">View Details</a-button>
+          <a-button class="bg-primary-m-primary font-bold text-white">Get Promo</a-button>
+        </div>
       </div>
+    </div>
+    <!-- Partners -->
+    <a-divider type="horizontal" orientation="center" class="font-bold text-2xl">Our Partners</a-divider>
+    <div class="flex justify-center items-center flex-col md:flex-row w-full">
+      <img :src="item.img" alt="" class="m-2" v-for="(item, index) in partners" :key="index" />
     </div>
   </div>
 </template>
@@ -206,6 +236,22 @@ const featured = [
     model: '1.5L DCT',
   },
 ];
+
+const partners = [
+  {
+    img: require('assets/images/logo.jpeg'),
+  },
+  {
+    img: require('assets/images/logo.jpeg'),
+  },
+  {
+    img: require('assets/images/logo.jpeg'),
+  },
+  {
+    img: require('assets/images/logo.jpeg'),
+  },
+];
+
 export default {
   layout: 'site',
   middleware: 'guest',
@@ -215,6 +261,7 @@ export default {
       newCars,
       brands,
       featured,
+      partners,
     };
   },
 
@@ -233,5 +280,33 @@ export default {
 .ant-card-head-title {
   font-size: 1.2rem;
   font-weight: bold;
+}
+
+.ant-carousel :deep(.slick-slide) {
+  text-align: center;
+  height: 160px;
+  line-height: 160px;
+  background: #364d79;
+  overflow: hidden;
+}
+
+.ant-carousel :deep(.slick-arrow.custom-slick-arrow) {
+  width: 25px;
+  height: 25px;
+  font-size: 25px;
+  color: #fff;
+  background-color: rgba(31, 45, 61, 0.11);
+  opacity: 0.3;
+  z-index: 1;
+}
+.ant-carousel :deep(.custom-slick-arrow:before) {
+  display: none;
+}
+.ant-carousel :deep(.custom-slick-arrow:hover) {
+  opacity: 0.5;
+}
+
+.ant-carousel :deep(.slick-slide h3) {
+  color: #fff;
 }
 </style>

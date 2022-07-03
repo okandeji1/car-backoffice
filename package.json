@@ -11,6 +11,7 @@
     "lint": "yarn lint:js"
   },
   "dependencies": {
+    "@ant-design/icons-vue": "^6.1.0",
     "@mathieustan/vue-datepicker": "^0.2.11",
     "@nuxt/typescript-runtime": "^2.0.0",
     "@nuxtjs/auth": "4.5.1",
