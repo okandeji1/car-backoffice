@@ -114,9 +114,29 @@
         </div>
       </div>
     </div>
+    <!-- Quick Links -->
+    <div class="flex flex-col p-2 w-full">
+      <h1 class="font-bold text-lg">Quick Links</h1>
+      <div class="flex justify-center items-center">
+        <div class="flex flex-col p-1">
+          <h3 class="font-bold">Toyota</h3>
+          <p v-for="(item, index) in toyotas" :key="index" class="text-primary-m-primary cursor-pointer">{{item.model}}</p>
+        </div>
+        <div class="flex flex-col p-1">
+          <h3 class="font-bold">Mitsubishi</h3>
+          <p v-for="(item, index) in mitsubishis" :key="index" class="text-primary-m-primary cursor-pointer">{{item.model}}</p>
+        </div>
+      </div>
+    </div>
     <!-- Partners -->
     <a-divider type="horizontal" orientation="center" class="font-bold text-2xl">Our Partners</a-divider>
-    <div class="flex justify-center items-center flex-col md:flex-row w-full">
+    <a-carousel autoplay :dots="false" class="md:hidden">
+      <div class="flex flex-col p-2" v-for="(item, index) in partners" :key="index">
+        <img :src="item.img" alt="" class="w-full" />
+      </div>
+    </a-carousel>
+    <!-- Large screens -->
+    <div class="hidden md:flex justify-center items-center flex-col md:flex-row w-full">
       <img :src="item.img" alt="" class="m-2" v-for="(item, index) in partners" :key="index" />
     </div>
   </div>
@@ -252,6 +272,36 @@ const partners = [
   },
 ];
 
+const toyotas = [
+  {
+    model: 'Toyota Hilux 2022',
+  },
+  {
+    model: 'Toyota Vios 2022',
+  },
+  {
+    model: 'Toyota Hiace 2022',
+  },
+  {
+    model: 'Toyota Corolla 2022',
+  },
+];
+
+const mitsubishis = [
+  {
+    model: 'Mitsubishi Montero 2018',
+  },
+  {
+    model: 'Mitsubishi Pajero 2022',
+  },
+  {
+    model: 'Mitsubishi Mirage 2020',
+  },
+  {
+    model: 'Mitsubishi Xpander 2019',
+  },
+]
+
 export default {
   layout: 'site',
   middleware: 'guest',
@@ -262,6 +312,8 @@ export default {
       brands,
       featured,
       partners,
+      toyotas,
+      mitsubishis,
     };
   },
 
