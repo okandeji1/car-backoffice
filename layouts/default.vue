@@ -371,8 +371,6 @@ export default {
     ...mapGetters({
       locale: 'settings/locale',
       theme: 'settings/getTheme',
-      isAuthenticated: 'isAuthenticated',
-      loggedInUser: 'loggedInUser',
       getSiteFormat: 'settings/getSiteFormat',
     }),
 

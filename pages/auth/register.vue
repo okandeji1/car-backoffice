@@ -146,8 +146,6 @@ export default {
   computed: {
     ...mapGetters({
       theme: 'settings/theme',
-      isAuthenticated: 'isAuthenticated',
-      loggedInUser: 'loggedInUser',
     }),
     isUsernameError() {
       return this.$v.login.username.$error;

@@ -7,17 +7,17 @@
         <div class="max-w-sm px-2 mx-auto mb-10" style="max-width: 340px">
           <div class="w-full mt-6 mb-4 text-left">
             <label for="" class="text-xs text-primary-default-main"> Username </label>
-            <a-input disabled class="text-primary-default-main" v-model="loggedInUser.username" placeholder="Username" />
+            <a-input disabled class="text-primary-default-main" placeholder="Username" />
           </div>
 
           <div class="w-full mt-2 mb-4 text-left">
             <label for="first-name" class="text-xs text-primary-default-main"> Firstname </label>
-            <a-input disabled class="text-primary-default-main" v-model="loggedInUser.firstName" placeholder="First Name" />
+            <a-input disabled class="text-primary-default-main" placeholder="First Name" />
           </div>
 
           <div class="w-full mt-2 mb-4 text-left">
             <label for="first-name" class="text-xs text-primary-default-main"> Last Name </label>
-            <a-input disabled class="text-primary-default-main" v-model="loggedInUser.lastName" placeholder="Last Name" />
+            <a-input disabled class="text-primary-default-main" placeholder="Last Name" />
           </div>
 
           <div class="w-full mt-2 mb-4 text-left">
@@ -37,7 +37,7 @@
 
           <div class="w-full mt-2 mb-4 text-left">
             <label for="email" class="text-xs text-primary-default-main"> Email Address </label>
-            <a-input disabled class="text-primary-default-main" v-model="loggedInUser.email" placeholder="Email Address" />
+            <a-input disabled class="text-primary-default-main" placeholder="Email Address" />
           </div>
 
           <div class="w-full mt-2 mb-4 text-left">
@@ -45,105 +45,23 @@
             <a-input placeholder="Phone Number" class="text-primary-default-main" />
           </div>
 
-          <a-button size="large" class="w-full mt-4 text-white bg-primary-m-success" @click="handleUpdateProfile"> Update Profile </a-button>
-        </div>
-      </a-tab-pane>
-
-      <a-tab-pane
-        key="2"
-        tab="Bank Account Information"
-        v-if="loggedInUser.role !== 'tenant' || loggedInUser.role !== 'staff' || loggedInUser.role !== 'cashier'"
-      >
-        <p class="block">Ensure your name (First and last name) matches with your bank details</p>
-        <div class="px-2 mx-auto md:max-w-2xl">
-          <div class="table-container table-title">
-            <div></div>
-            <div>Bank Name</div>
-            <div>Account Number</div>
-            <div></div>
-          </div>
-
-          <div class="table-container table-data" v-for="(bank, index) in banks" :key="index">
-            <div><a-checkbox> </a-checkbox></div>
-            <div>{{ bank.bankName }}</div>
-            <div>{{ bank.accountNumber }}</div>
-            <a href="#">Delete</a>
-          </div>
-
-          <div class="table-data">
-            <div class="flex gap-6">
-              <a-checkbox @change="showAddBank"> </a-checkbox>
-              <p>Add new bank</p>
-            </div>
-
-            <div class="mx-auto md:max-w-sm" v-if="showAddBankButton">
-              <div>
-                <div>
-                  <label for="bankName"> Bank Name</label>
-                  <a-select
-                    size="large"
-                    v-model="profileData.bankDetails.personal[0].bankName"
-                    showSearch
-                    @change="handleBankCode"
-                    placeholder="Select Bank"
-                    class="block mt-1 text-primary-darker"
-                  >
-                    <a-select-option v-for="(item, index) in nigeriaBanks" :key="index" :value="item.slug" class="text-primary-darker">
-                      {{ item.name }}
-                    </a-select-option>
-                  </a-select>
-                </div>
-                <!-- <div>
-                  <label for="indoor"> Bank Code</label>
-                  <a-input size="large" placeholder="Bank code" disabled class="mt-1 text-primary-default-main" :value="bankCode"> </a-input>
-                </div> -->
-              </div>
-              <div class="mt-4">
-                <label for="indoor"> Account Number</label>
-                <a-input
-                  v-model="profileData.bankDetails.personal[0].accountNumber"
-                  size="large"
-                  placeholder="Enter your Account Number"
-                  class="mt-1 text-primary-default-main"
-                >
-                </a-input>
-              </div>
-              <a-button size="large" class="w-full mt-4 text-white bg-primary-m-success"> Add Bank </a-button>
-            </div>
-          </div>
+          <a-button size="large" class="w-full mt-4 text-white bg-primary-m-success"> Update Profile </a-button>
         </div>
       </a-tab-pane>
     </a-tabs>
   </main>
 </template>
 <script lang="ts">
-import Vue from 'vue';
 import { mapGetters, mapActions } from 'vuex';
-import { notify } from '~/utils/utils';
-
-const profileData = {
-  bankDetails: {
-    personal: [
-      {
-        accountName: '',
-        accountNumber: '',
-        bankName: '',
-        bankCode: '',
-        isDefault: true,
-      },
-    ],
-  },
-};
 
 export default {
   middleware: 'auth',
   computed: {
-    ...mapGetters({ isAuthenticated: 'isAuthenticated', loggedInUser: 'loggedInUser', getBanks: 'user/getBanks' }),
+    ...mapGetters({}),
   },
 
   data() {
     return {
-      profileData,
       bankCode: undefined,
       showAddBankButton: false,
       banks: [],
@@ -151,40 +69,6 @@ export default {
   },
 
   methods: {
-    async handleUpdateProfile() {
-      try {
-        // @ts-ignore
-        this.profileData.bankDetails.personal[0].accountName = `${this.loggedInUser.firstName} ${this.loggedInUser.lastName}`;
-        // @ts-ignore
-        this.profileData.username = this.loggedInUser.username;
-        // @ts-ignore
-        this.profileData.bankDetails.personal[0].bankCode = this.bankCode;
-        const res = await this.updateProfileApi(this.profileData);
-        if (res.status) {
-          notify({
-            type: 'success',
-            message: res.message,
-          });
-
-          this.profileData = {
-            bankDetails: {
-              personal: [
-                {
-                  accountName: '',
-                  accountNumber: '',
-                  bankName: '',
-                  bankCode: '',
-                  isDefault: true,
-                },
-              ],
-            },
-          };
-          // @ts-ignore
-          this.bankCode = '';
-        }
-      } catch (error) {}
-    },
-
     handleBankCode(value: any) {
       // @ts-ignore
       const selectedBank = this.getBanks.filter((bank) => bank.slug === value);
@@ -196,17 +80,10 @@ export default {
       this.showAddBankButton = !this.showAddBankButton;
     },
 
-    ...mapActions({
-      updateProfileApi: 'user/updateProfileApi',
-    }),
+    ...mapActions({}),
   },
 
-  mounted() {
-    this.fetchBanks();
-  },
-  created() {
-    this.banks = this.loggedInUser.bankDetails.personal;
-  },
+  mounted() {},
 };
 </script>
 <style lang="scss" scoped>

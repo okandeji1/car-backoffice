@@ -1596,30 +1596,9 @@ export default {
   },
   computed: {
     ...mapGetters({
-      isAuthenticated: 'isAuthenticated',
-      loggedInUser: 'loggedInUser',
     }),
   },
   methods: {
-    userAreaLinks() {
-      if (this.loggedInUser.role == 'tenant') {
-        return this.tenantUserLinks;
-      } else if (this.loggedInUser.role == 'staff') {
-        return this.staffUserLinks;
-      } else if (this.loggedInUser.role == 'area-manager') {
-        return this.areaManagerUserLinks;
-      } else if (this.loggedInUser.role == 'super-agent') {
-        return this.superAgentUserLinks;
-      } else if (this.loggedInUser.role == 'agent') {
-        return this.shopAgentUserLinks;
-      } else if (this.loggedInUser.role == 'cashier') {
-        return this.shopCashiersUserLinks;
-      } else if (this.loggedInUser.role == 'online-user') {
-        return this.onlineUserLinks;
-      } else {
-        return this.unAuthhUserLinks;
-      }
-    },
     handleResize() {
       this.windowWidth = window.innerWidth;
       this.windowHeight = window.innerHeight;

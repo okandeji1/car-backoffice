@@ -172,9 +172,6 @@ export default Vue.extend({
       timezone: 'settings/timezone',
       oddsFormats: 'settings/oddsFormats',
       timezones: 'settings/timezones',
-      isAuthenticated: 'isAuthenticated',
-      loggedInUser: 'loggedInUser',
-      getMessageCounts: 'user/getMessageCounts',
       theme: 'settings/getTheme',
     }),
   },
@@ -192,42 +189,6 @@ export default Vue.extend({
 
       isDark ? htmlClasses.remove('dark') : htmlClasses.add('dark');
     },
-    async logout() {
-      // @ts-ignore
-      await this.$auth.logout();
-    },
-
-    handleSubmit(e: any) {
-      e.preventDefault();
-      // @ts-ignore
-      this.form.validateFields(async (err, values) => {
-        if (!err) {
-          const validateNumber = /[0-9]{11}/;
-          if (values.username.includes('-')) {
-            values.username = values.username.toUpperCase();
-          } else if (values.username.match(validateNumber)) {
-            values.username = values.username.replace('0', '+234');
-          } else {
-            values.username = values.username;
-          }
-          try {
-            // @ts-ignore
-            const login = await this.$auth.loginWith('local', { data: values });
-            // @ts-ignore
-            this.form.resetFields();
-            notify({
-              type: 'success',
-              message: this.$t('components.login.notification.success.message'),
-            });
-          } catch (error) {
-            notify({
-              type: 'error',
-              message: 'Error! Internal server error',
-            });
-          }
-        }
-      });
-    },
 
     setLocale(events: any) {
       this.$i18n.setLocale(events.key);
@@ -242,22 +203,6 @@ export default Vue.extend({
     },
     openSettings() {
       this.isSettings = !this.isSettings;
-    },
-
-    // Add user to socket
-    addUser() {
-      // if (this.isAuthenticated) {
-      // const socket = io(this.$config.socketApiUrl);
-      // socket.emit('addUser', this.loggedInUser.username);
-
-      const socket = this.$refs;
-      // }
-    },
-
-    // get message
-    getMessage() {
-      const socket = io();
-      socket.on('getMessage', (data) => {});
     },
 
     onChange(e: any) {
@@ -278,16 +223,7 @@ export default Vue.extend({
     },
   },
 
-  // watch: {
-  //   isAuthenticated: 'addUser',
-  // },
-
-  mounted() {
-    this.$nextTick(() => {
-      this.addUser();
-      // this.getMessage();
-    });
-  },
+  mounted() {},
 
   beforeMount() {
     this.initTheme();

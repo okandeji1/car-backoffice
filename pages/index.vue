@@ -27,10 +27,10 @@
         <p class="text-primary-m-primary">Advance search</p>
       </div>
     </a-card>
-    <div class="flex flex-col w-full p-2 md:justify-center md:items-center">
+    <div class="flex flex-col w-full justify-between p-4">
       <h1 class="text-xl font-black text-left">New Cars Guide</h1>
-      <div class="flex flex-col md:flex-row">
-        <div class="flex flex-col w-full h-20 border my-1" v-for="(car, index) in newCars" :key="index">
+      <div class="flex flex-col md:flex-row justify-between">
+        <div class="flex flex-col w-full h-20 border my-2 justify-between" v-for="(car, index) in newCars" :key="index">
           <img :src="car.img" alt="" class="w-64 h-48" />
           <h3 class="font-bold text-lg cursor-pointer ml-4">{{ car.title }}</h3>
           <p class="text-sm text-gray-500 ml-4">Model Price</p>
@@ -38,7 +38,7 @@
         </div>
       </div>
       <div class="flex flex-col md:flex-row">
-        <div class="flex flex-col w-full h-20 border my-1" v-for="(car, index) in newCars" :key="index">
+        <div class="flex flex-col w-full h-20 border my-2" v-for="(car, index) in newCars" :key="index">
           <img :src="car.img" alt="" class="w-64 h-48" />
           <h3 class="font-bold text-lg cursor-pointer ml-4">{{ car.title }}</h3>
           <p class="text-sm text-gray-500 ml-4">Model Price</p>
@@ -47,10 +47,10 @@
       </div>
     </div>
     <!-- Used car tab -->
-    <div class="flex flex-col w-full p-2 md:justify-center md:items-center">
+    <div class="flex flex-col w-full md:justify-between p-4">
       <h1 class="text-xl font-black text-left">Used Cars For Sale</h1>
       <div class="flex flex-col md:flex-row">
-        <div class="flex flex-col w-full h-20 border my-1" v-for="(car, index) in newCars" :key="index">
+        <div class="flex flex-col w-full h-20 border my-2" v-for="(car, index) in newCars" :key="index">
           <img :src="car.img" alt="" class="w-64 h-48" />
           <h3 class="font-bold text-lg cursor-pointer ml-4">{{ car.title }}</h3>
           <p class="text-sm text-gray-500 ml-4">Model Price</p>
@@ -58,7 +58,7 @@
         </div>
       </div>
       <div class="flex flex-col md:flex-row">
-        <div class="flex flex-col w-full h-20 border my-1" v-for="(car, index) in newCars" :key="index">
+        <div class="flex flex-col w-full h-20 border my-2" v-for="(car, index) in newCars" :key="index">
           <img :src="car.img" alt="" class="w-64 h-48" />
           <h3 class="font-bold text-lg cursor-pointer ml-4">{{ car.title }}</h3>
           <p class="text-sm text-gray-500 ml-4">Model Price</p>
@@ -67,11 +67,11 @@
       </div>
     </div>
     <!-- Car Brand -->
-    <div class="flex flex-col justify-center items-center p-2">
+    <div class="flex flex-col w-full md:justify-between p-4">
       <h1 class="font-bold text-lg">Car Price Brand</h1>
-      <a-row :gutter="4" type="flex">
-        <a-col :span="8" v-for="(brand, index) in brands" :key="index" class="mb-2">
-          <div class="flex flex-col justify-center items-center border w-full px-2 py-2">
+      <a-row :gutter="8" type="flex">
+        <a-col :sm="4" :md="4" v-for="(brand, index) in brands" :key="index" class="mb-2 px-0">
+          <div class="flex flex-col justify-center items-center border w-full">
             <img :src="brand.img" alt="" />
             <h3>{{ brand.name }}</h3>
           </div>
@@ -79,12 +79,12 @@
       </a-row>
     </div>
     <!-- Featured promo (installment) -->
-    <div class="flex flex-col p-2">
+    <div class="flex flex-col p-4">
       <h1 class="font-bold text-lg">Featured Promo</h1>
       <a-carousel autoplay :dots="false" class="md:hidden">
         <div class="flex flex-col shadow-lg border" v-for="(item, index) in featured" :key="index">
           <img :src="item.img" alt="" class="w-full" />
-          <div class="flex justify-center items-center bg-primary-m-primary m-1">
+          <div class="flex justify-center items-center bg-primary-m-primary my-2">
             <h2 class="font-bold text-lg cursor-pointer">
               {{ item.price }} <span>{{ item.period }}</span>
             </h2>
@@ -99,10 +99,10 @@
       <p class="text-center cursor-pointer text-primary-m-primary p-2 text-lg md:hidden">View all promos</p>
     </div>
     <!-- Featured large screen -->
-    <div class="hidden md:flex justify-center items-center p-2">
-      <div class="flex flex-col mx-2 justify-center border shadow-lg" v-for="(item, index) in featured" :key="index">
+    <div class="hidden md:flex justify-between overflow-x-scroll p-4">
+      <div class="flex flex-col justify-center border shadow-lg" v-for="(item, index) in featured" :key="index">
         <img :src="item.img" alt="" class="w-full" />
-        <div class="flex justify-center items-center bg-primary-m-primary m-1">
+        <div class="flex justify-center items-center bg-primary-m-primary my-2">
           <h2 class="font-bold text-lg cursor-pointer">
             {{ item.price }} <span>{{ item.period }}</span>
           </h2>
@@ -115,28 +115,36 @@
       </div>
     </div>
     <!-- Quick Links -->
-    <div class="flex flex-col p-2 w-full">
+    <div class="flex flex-col w-full mt-2 p-4">
       <h1 class="font-bold text-lg">Quick Links</h1>
-      <div class="flex justify-center items-center">
+      <div class="flex justify-between">
         <div class="flex flex-col p-1">
           <h3 class="font-bold">Toyota</h3>
-          <p v-for="(item, index) in toyotas" :key="index" class="text-primary-m-primary cursor-pointer">{{item.model}}</p>
+          <p v-for="(item, index) in toyotas" :key="index" class="text-primary-m-primary cursor-pointer">{{ item.model }}</p>
         </div>
         <div class="flex flex-col p-1">
           <h3 class="font-bold">Mitsubishi</h3>
-          <p v-for="(item, index) in mitsubishis" :key="index" class="text-primary-m-primary cursor-pointer">{{item.model}}</p>
+          <p v-for="(item, index) in mitsubishis" :key="index" class="text-primary-m-primary cursor-pointer">{{ item.model }}</p>
+        </div>
+        <div class="flex flex-col p-1">
+          <h3 class="font-bold">Toyota</h3>
+          <p v-for="(item, index) in toyotas" :key="index" class="text-primary-m-primary cursor-pointer">{{ item.model }}</p>
+        </div>
+        <div class="flex flex-col p-1">
+          <h3 class="font-bold">Mitsubishi</h3>
+          <p v-for="(item, index) in mitsubishis" :key="index" class="text-primary-m-primary cursor-pointer">{{ item.model }}</p>
         </div>
       </div>
     </div>
     <!-- Partners -->
     <a-divider type="horizontal" orientation="center" class="font-bold text-2xl">Our Partners</a-divider>
-    <a-carousel autoplay :dots="false" class="md:hidden">
+    <a-carousel autoplay :dots="false" class="md:hidden p-4">
       <div class="flex flex-col p-2" v-for="(item, index) in partners" :key="index">
         <img :src="item.img" alt="" class="w-full" />
       </div>
     </a-carousel>
     <!-- Large screens -->
-    <div class="hidden md:flex justify-center items-center flex-col md:flex-row w-full">
+    <div class="hidden md:flex justify-between w-full p-4">
       <img :src="item.img" alt="" class="m-2" v-for="(item, index) in partners" :key="index" />
     </div>
   </div>
@@ -300,7 +308,7 @@ const mitsubishis = [
   {
     model: 'Mitsubishi Xpander 2019',
   },
-]
+];
 
 export default {
   layout: 'site',
@@ -361,4 +369,15 @@ export default {
 .ant-carousel :deep(.slick-slide h3) {
   color: #fff;
 }
+
+.ant-row-flex {
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  justify-content: space-between;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* .mb-2 ant-col ant-col-sm-4 ant-col-md-4 */
 </style>

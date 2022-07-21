@@ -1,7 +1,7 @@
 <template>
   <main class="min-h-screen flex flex-col content">
     <lazy-car-navbar />
-    <Nuxt />
+    <Nuxt class="" />
     <lazy-car-footer />
   </main>
 </template>
